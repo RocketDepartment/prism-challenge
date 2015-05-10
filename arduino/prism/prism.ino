@@ -28,6 +28,10 @@ typedef struct _laser {
 
 Laser lasers[NUM_LASERS];
 
+// Functions defined in indicator.ino
+void updateIndicators( Laser laserArr[], int n );
+
+// Functions defined in laser.ino
 void updateLasers( Laser laserArr[], int n );
 void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicators[], int n );
 void blinkLasers( Laser laserArr[], int n, int times, int blinkSpeed);
@@ -35,6 +39,9 @@ void fadeLasers( Laser laserArr[], int n, int times, int fadeSpeed);
 void blinkLaser( Laser l, int times, int blinkSpeed );
 void fadeLaser( Laser l, int times, int fadeSpeed );
 void testLasers( Laser laserArr[], int n );
+
+// Functions defined in sensor.ino
+void readSensors( Laser laserArr[], int n );
   
 int pins[] = { 9, 8, 7 };
 int sensors[] = { A0, A1, A2 };
@@ -53,5 +60,5 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  
+  updateIndicators( lasers, NUM_LASERS );
 }
