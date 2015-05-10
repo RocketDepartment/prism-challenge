@@ -5,7 +5,22 @@
  *Emma Fletcher
  *05.09.2015
  */
-  
+
+/*
+ * initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicators[], int n):
+ * Function to initialize all lasers at start of program
+ *
+ * Parameter 1: Laser laserArr[] - Array of Lasers
+ * Parameter 2: int pins[] - Arry of pins lasers are attached to, index value matches
+ * index of laserArr index
+ * Parameter 3: int sensors[] - Array of pins light sensors are attached to, index value
+ * matches index of laserArr index
+ * Parameter 4: int indicators[] - Array of pin indicators lights are attached to, index
+ * value matches index of laserArr index
+ * Parameter 5: int n - number of lasers to initialize
+ *
+ * Return: Void
+ */  
 void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicators[], int n ){
     
   for( int i = 0; i < n; i++ ){
@@ -39,6 +54,17 @@ void updateLasers( Laser laserArr[], int n ){
     }
 }
 
+/*
+ * blinkLasers( Laser laserArr[], int n, int times, int fadeSpeed): Function
+ * to blink multiple lasers at the same time
+ *
+ * Parameter 1: Laser laserArr[] - Array of Lasers
+ * Parameter 2: int n - number of Lasers in laserArr[]
+ * Parameter 3: int times - number of times to fade
+ * Parameter 4: int blinkSpeed - delay in milliseconds between blinks
+ *
+ * Return: Void
+ */
 void blinkLasers( Laser laserArr[], int n, int times, int blinkSpeed){
   while(times > 0) {
     for( int i = 0; i < n; i++ ){
@@ -58,6 +84,18 @@ void blinkLasers( Laser laserArr[], int n, int times, int blinkSpeed){
   
 }
 
+/*
+ * fadeLasers( Laser laserArr[], int n, int times, int fadeSpeed): Function
+ * to fade multiple lasers at the same time
+ *
+ * Parameter 1: Laser laserArr[] - Array of Lasers
+ * Parameter 2: int n - number of Lasers in laserArr[]
+ * Parameter 3: int times - number of times to fade
+ * Parameter 4: int fadeSpeed - delay in milliseconds between brightness
+ * value change
+ *
+ * Return: Void
+ */
 void fadeLasers( Laser laserArr[], int n, int times, int fadeSpeed){
   while(times > 0) {
     
@@ -89,6 +127,16 @@ void fadeLasers( Laser laserArr[], int n, int times, int fadeSpeed){
   
 }
 
+/*
+ * blinkLaser( Laser l, int times, int blinkSpeed ): Function to blink
+ * individual laser
+ *
+ * Parameter 1: Laser l - Laser to blink
+ * Parameter 2: int times - number of time to blink
+ * Parameter 3: int blinkSpeed - delay in milleseconds between blinks
+ *
+ * Return: Void
+ */
 void blinkLaser( Laser l, int times, int blinkSpeed ){
   for( int i = 0; i < times; i++ ){
     digitalWrite(l.pin, LOW);
@@ -98,6 +146,15 @@ void blinkLaser( Laser l, int times, int blinkSpeed ){
   } 
 }
 
+/*
+ * fadeLaser( Laser l, int times, int fadeSpeed ): Function to fade individual Laser
+ *
+ * Parameter 1: Laser l - Laser to fade
+ * Parameter 2: int times - number of times to fade
+ * Parameter 3: int fadeSpeed - delay in milliseconds between brightness value change
+ *
+ * Return: Void
+ */
 void fadeLaser( Laser l, int times, int fadeSpeed ){
   for( int i = 0; i < times; i++ ){
     // sets the value (range from 0 to 255):
@@ -121,6 +178,15 @@ void fadeLaser( Laser l, int times, int fadeSpeed ){
   } 
 }
 
+/*
+ * laserTest( Laser laserArry[], int n ): Function test the functions inside laser.ino. Currently
+ * tests blinkLasers(), blinkLaser, fadeLasers, fadeLaser
+ *
+ * Parameter 1: Laser laserArr[] - Array of Lasers
+ * Parameter 2: int n - number of Lasers in laserArr[]
+ *
+ * Return: Void
+ */
 void testLasers( Laser laserArr[], int n ){
 
   blinkLasers(laserArr, n, 3, 150);

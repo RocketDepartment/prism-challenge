@@ -54,22 +54,4 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
   
-  blinkLasers(lasers, NUM_LASERS, 3, 150);
-  delay(500);  
-  blinkLaser( lasers[0], 2, 150 );
-  delay(500);
-  blinkLaser( lasers[1], 2, 150 );
-  delay(500);
-  blinkLaser( lasers[2], 2, 150 );
-  delay(500);
-  
-  fadeLasers(lasers, NUM_LASERS, 3, 15);
-  delay(500);
-  fadeLaser( lasers[0], 2, 15 );
-  delay(500);
-  fadeLaser( lasers[1], 2, 15 );
-  delay(500);
-  fadeLaser( lasers[2], 2, 15 );
-  delay(500);
-  
 }
