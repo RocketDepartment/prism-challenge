@@ -120,3 +120,25 @@ void fadeLaser( Laser l, int times, int fadeSpeed ){
     }   
   } 
 }
+
+void testLasers( Laser laserArr[], int n ){
+
+  blinkLasers(laserArr, n, 3, 150);
+  delay(500);  
+  blinkLaser( laserArr[0], 2, 150 );
+  delay(500);
+  blinkLaser( laserArr[1], 2, 150 );
+  delay(500);
+  blinkLaser( laserArr[2], 2, 150 );
+  delay(500);
+  
+  fadeLasers(laserArr, n, 3, 15);
+  delay(500);
+  fadeLaser( laserArr[0], 2, 15 );
+  delay(500);
+  fadeLaser( laserArr[1], 2, 15 );
+  delay(500);
+  fadeLaser( laserArr[2], 2, 15 );
+  delay(500);
+  
+}

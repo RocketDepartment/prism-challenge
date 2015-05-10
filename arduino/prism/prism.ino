@@ -34,6 +34,7 @@ void blinkLasers( Laser laserArr[], int n, int times, int blinkSpeed);
 void fadeLasers( Laser laserArr[], int n, int times, int fadeSpeed);
 void blinkLaser( Laser l, int times, int blinkSpeed );
 void fadeLaser( Laser l, int times, int fadeSpeed );
+void testLasers( Laser laserArr[], int n );
   
 int pins[] = { 9, 8, 7 };
 int sensors[] = { A0, A1, A2 };
