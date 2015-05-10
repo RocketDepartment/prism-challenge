@@ -8,11 +8,14 @@
 void readSensors( Laser laserArr[], int n ){
   
   for( int i = 0; i < n; i++ ){
-    int sensorVal = analogRead(laserArr[i].sensorPin);
-    Serial.print(i);
-    Serial.print(" : ");
-    Serial.println(sensorVal);
-    delay(250);    
+    int val = analogRead(laserArr[i].sensorPin);
+    laserArr[i].sensorValue = val;
+    if( val > 100 ){
+      laserArr[i].indicatorValue = true;
+    } else {
+      laserArr[i].indicatorValue = false;
+    }
+    delay(1);    
   }
   
 }

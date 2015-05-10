@@ -30,7 +30,7 @@ void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicato
       aLaser.sensorPin = sensors[i];
       aLaser.sensorValue = 0;
       aLaser.indicatorPin = indicators[i];
-      aLaser.indicatorValue = HIGH;
+      aLaser.indicatorValue = true;
       
       pinMode(aLaser.pin, OUTPUT);
       pinMode(aLaser.sensorPin, INPUT);
@@ -41,17 +41,6 @@ void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicato
       laserArr[i] = aLaser;
     }
     
-}
-
-void updateLasers( Laser laserArr[], int n ){
-    // loop through each laser
-    Serial.println("New Loop");
-    for( int i = 0; i < n; i++ ){
-      Serial.print(i);
-      Serial.print(" : ");
-      Serial.println(laserArr[i].pin);
-      delay(1000);
-    }
 }
 
 /*
