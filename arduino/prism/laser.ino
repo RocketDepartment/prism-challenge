@@ -97,3 +97,26 @@ void blinkLaser( Laser l, int times, int blinkSpeed ){
     delay(blinkSpeed);   
   } 
 }
+
+void fadeLaser( Laser l, int times, int fadeSpeed ){
+  for( int i = 0; i < times; i++ ){
+    // sets the value (range from 0 to 255):
+    for(int fadeValue = 0 ; fadeValue <= 255; fadeValue +=5) { 
+        if( fadeValue == 255 ){
+          delay(250);
+        }
+        analogWrite(l.pin, fadeValue);  
+      // wait for 30 milliseconds to see the dimming effect    
+      delay(fadeSpeed);                            
+    } 
+    
+    
+    // fade out from max to min in increments of 5 points:
+    for(int fadeValue = 255 ; fadeValue >= 0; fadeValue -=5) { 
+      // sets the value (range from 0 to 255):
+      analogWrite(l.pin, fadeValue);  
+      // wait for 30 milliseconds to see the dimming effect    
+      delay(fadeSpeed);                            
+    }   
+  } 
+}

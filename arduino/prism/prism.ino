@@ -33,6 +33,7 @@ void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicato
 void blinkLasers( Laser laserArr[], int n, int times, int blinkSpeed);
 void fadeLasers( Laser laserArr[], int n, int times, int fadeSpeed);
 void blinkLaser( Laser l, int times, int blinkSpeed );
+void fadeLaser( Laser l, int times, int fadeSpeed );
   
 int pins[] = { 9, 8, 7 };
 int sensors[] = { A0, A1, A2 };
@@ -51,12 +52,23 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  //updateLasers( lasers, NUM_LASERS );
-  blinkLaser( lasers[0], 5, 250 );
-  delay(1000);
-  blinkLaser( lasers[1], 5, 250 );
-  delay(1000);
-  blinkLaser( lasers[2], 5, 250 );
-  delay(1000);
+  
+  blinkLasers(lasers, NUM_LASERS, 3, 150);
+  delay(500);  
+  blinkLaser( lasers[0], 2, 150 );
+  delay(500);
+  blinkLaser( lasers[1], 2, 150 );
+  delay(500);
+  blinkLaser( lasers[2], 2, 150 );
+  delay(500);
+  
+  fadeLasers(lasers, NUM_LASERS, 3, 15);
+  delay(500);
+  fadeLaser( lasers[0], 2, 15 );
+  delay(500);
+  fadeLaser( lasers[1], 2, 15 );
+  delay(500);
+  fadeLaser( lasers[2], 2, 15 );
+  delay(500);
   
 }
