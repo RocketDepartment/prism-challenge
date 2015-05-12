@@ -5,7 +5,7 @@
  *05.10.2015
  */
  
- void updateIndicators( Laser laserArr[], int n ){
+void updateIndicators( Laser laserArr[], int n ){
    int numTripped = 0;
    
    for( int i = 0; i < n; i++ ){
@@ -24,4 +24,4 @@
      digitalWrite(laserTrippedPin, LOW);
    }
    
- }
+}

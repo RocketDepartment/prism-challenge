@@ -9,7 +9,7 @@
  */
 
 
-#define NUM_LASERS 1
+#define NUM_LASERS 4
 
 /* structure for lasers
  * pin - the pin the laser is connected to
@@ -33,6 +33,7 @@ bool laserTripped = false;
 bool laserStartTripped = false;
 
 int gameModePin = 52;
+int gameModeButton = 48;
 int laserTrippedPin = 50;
 
 // Functions defined in indicator.ino
@@ -50,9 +51,9 @@ void testLasers( Laser laserArr[], int n );
 // Functions defined in sensor.ino
 void readSensors( Laser laserArr[], int n );
   
-int pins[] = { 9 };
-int sensors[] = { A0 };
-int indicators[] = { 22 };
+int pins[] = { 9, 8, 7, 6 };
+int sensors[] = { A0, A1, A2, A3 };
+int indicators[] = { 22, 24, 26, 28 };
 
 
 // the setup routine runs once when you press reset:
@@ -60,6 +61,7 @@ void setup() {
   Serial.begin(9600);
   
   pinMode(gameModePin, OUTPUT);
+  pinMode(gameModeButton, INPUT);  
   pinMode(laserTrippedPin, OUTPUT); 
   
   
@@ -71,6 +73,9 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
+  
+  int val = digitalRead(gameModeButton);
+  Serial.println(val);
   
   if( gameMode ){
     digitalWrite(gameModePin, HIGH);
