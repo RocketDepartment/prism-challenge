@@ -10,6 +10,7 @@
 
 
 #define NUM_LASERS 4
+#define LIGHT_LEVEL 350
 
 /* structure for lasers
  * pin - the pin the laser is connected to
