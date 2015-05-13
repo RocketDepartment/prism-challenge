@@ -8,9 +8,11 @@
 void readSensors( Laser laserArr[], int n ){
   
   for( int i = 0; i < n; i++ ){
+    
     int val = analogRead(laserArr[i].sensorPin);
     laserArr[i].sensorValue = val;
-    if( val > LIGHT_LEVEL ){
+    
+    if( val > 100 ){
       laserArr[i].indicatorValue = true;
     } else {
       laserArr[i].indicatorValue = false;

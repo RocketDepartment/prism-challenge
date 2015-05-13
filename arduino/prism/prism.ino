@@ -9,8 +9,7 @@
  */
 
 
-#define NUM_LASERS 4
-#define LIGHT_LEVEL 350
+#define NUM_LASERS 1
 
 /* structure for lasers
  * pin - the pin the laser is connected to
@@ -27,18 +26,23 @@ typedef struct _laser {
    boolean indicatorValue; 
 } Laser;
 
-// Declar global variables for the game
+// Declare global variables for the game
 Laser lasers[NUM_LASERS];
 bool gameMode = true;
 bool laserTripped = false;
 bool laserStartTripped = false;
 
-int gameModePin = 52;
-int gameModeButton = 48;
-int laserTrippedPin = 50;
+int gameModeButton = 40;
+int resetButton = 42;
+int trippedButton = 44;
+
+int laserTrippedPin = 52;
+int startGamePin = 50;
+int gameModeIndicator = 46;
 
 // Functions defined in indicator.ino
 void updateIndicators( Laser laserArr[], int n );
+void reportStatus();
 
 // Functions defined in laser.ino
 void updateLasers( Laser laserArr[], int n );
@@ -52,19 +56,24 @@ void testLasers( Laser laserArr[], int n );
 // Functions defined in sensor.ino
 void readSensors( Laser laserArr[], int n );
   
-int pins[] = { 9, 8, 7, 6 };
-int sensors[] = { A0, A1, A2, A3 };
-int indicators[] = { 22, 24, 26, 28 };
+int pins[] = { 9 };
+int sensors[] = { A0 };
+int indicators[] = { 22 };
 
 
 // the setup routine runs once when you press reset:
 void setup() {    
-  Serial.begin(9600);
+  Serial.begin(9600); 
+ 
+  pinMode(gameModeButton, INPUT_PULLUP);
+  pinMode(resetButton, INPUT_PULLUP);
+  pinMode(trippedButton, INPUT_PULLUP); 
   
-  pinMode(gameModePin, OUTPUT);
-  pinMode(gameModeButton, INPUT);  
-  pinMode(laserTrippedPin, OUTPUT); 
+  pinMode(laserTrippedPin, OUTPUT);
+  pinMode(startGamePin, OUTPUT);
+  pinMode(gameModeIndicator, OUTPUT);
   
+  digitalWrite(startGamePin, LOW);
   
   initializeLasers( lasers, pins, sensors, indicators, NUM_LASERS ); 
   
@@ -75,13 +84,15 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
   
-  int val = digitalRead(gameModeButton);
-  Serial.println(val);
+  delay(250);
+  int gameMode = digitalRead(gameModeButton);
+  Serial.println(gameMode);
   
   if( gameMode ){
-    digitalWrite(gameModePin, HIGH);
+    reportStatus();
+    digitalWrite(gameModeIndicator, HIGH);
   } else {
-    digitalWrite(gameModePin, LOW);
+    digitalWrite(gameModeIndicator, HIGH);
   }
   
   readSensors( lasers, NUM_LASERS );
