@@ -43,8 +43,3 @@ void reportStatus(){
     digitalWrite(laserTrippedPin, LOW);
   }
 }
-
-void reset(){
-  //reset game
-  
-}

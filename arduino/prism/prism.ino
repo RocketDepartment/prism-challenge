@@ -32,13 +32,20 @@ bool gameMode = true;
 bool laserTripped = false;
 bool laserStartTripped = false;
 
-int gameModeButton = 40;
-int resetButton = 42;
-int trippedButton = 44;
+int gameModeButton = 38;
+int resetButton = 40;
+int trippedButton = 42;
 
 int laserTrippedPin = 52;
 int startGamePin = 50;
-int gameModeIndicator = 46;
+int gameModeIndicator = 44;
+
+int resetButtonLight = 46;
+int trippedButtonLight = 48;
+
+// Functions defined in button.ino
+void readButtons();
+void reset();
 
 // Functions defined in indicator.ino
 void updateIndicators( Laser laserArr[], int n );
@@ -72,8 +79,13 @@ void setup() {
   pinMode(laserTrippedPin, OUTPUT);
   pinMode(startGamePin, OUTPUT);
   pinMode(gameModeIndicator, OUTPUT);
+  pinMode(resetButtonLight, OUTPUT);
+  pinMode(trippedButtonLight, OUTPUT);
   
   digitalWrite(startGamePin, LOW);
+  
+  digitalWrite(resetButtonLight, HIGH);
+  digitalWrite(trippedButtonLight, HIGH);
   
   initializeLasers( lasers, pins, sensors, indicators, NUM_LASERS ); 
   
@@ -85,17 +97,10 @@ void setup() {
 void loop() {
   
   delay(250);
-  int gameMode = digitalRead(gameModeButton);
-  Serial.println(gameMode);
   
-  if( gameMode ){
-    reportStatus();
-    digitalWrite(gameModeIndicator, HIGH);
-  } else {
-    digitalWrite(gameModeIndicator, HIGH);
-  }
-  
+  readButtons();
   readSensors( lasers, NUM_LASERS );
   updateIndicators( lasers, NUM_LASERS );
+  //reportStatus();
 
 }
