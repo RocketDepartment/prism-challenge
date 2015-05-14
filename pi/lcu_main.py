@@ -68,6 +68,7 @@ def main():
 
 	current_game = None
 
+	# main loop for laser control unit
 	while True:
 
 		# read arduino inputs
@@ -93,6 +94,7 @@ def main():
 
 				print("Game Complete.")
 				print current_game
+
 			else:
 				IN_GAME = True
 				current_game = Game()

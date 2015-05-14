@@ -33,7 +33,10 @@ typedef struct _laser {
 } Laser;
 
 // Declare global variables for the game
+bool inGame = false;
 Laser lasers[NUM_LASERS];
+int startTime = 0;
+
 bool gameMode = true;
 bool laserTripped = false;
 bool laserStartTripped = false;
@@ -80,13 +83,14 @@ int indicators[] = { 22, 24, 26 };
 
 // the timer object
 SimpleTimer timer;
+int timerId;
 
 Adafruit_7segment matrix = Adafruit_7segment();
 
 
 // the setup routine runs once when you press reset:
 void setup() {
-  timer.setInterval(100, updateTimer);  
+  timerId = timer.setInterval(100, updateTimer);  
   Serial.begin(9600);
   matrix.begin(0x70); 
  
@@ -108,7 +112,11 @@ void setup() {
   digitalWrite(startButtonLight, HIGH);
   digitalWrite(trippedButtonLight, HIGH);
   
-  initializeLasers( lasers, pins, sensors, indicators, NUM_LASERS ); 
+  initializeLasers( lasers, pins, sensors, indicators, NUM_LASERS );
+ 
+  // initalize display with dashes
+  matrix.print(10000, DEC);
+  matrix.writeDisplay(); 
   
 }
 
@@ -116,13 +124,14 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  timer.run();
+  //Serial.println(inGame);
   
   readButtons();
   readSensors( lasers, NUM_LASERS );
   updateIndicators( lasers, NUM_LASERS );
   
-  if( gameMode ){
+  if( gameMode && inGame){
+    timer.run();
     reportStatus();
   }
 

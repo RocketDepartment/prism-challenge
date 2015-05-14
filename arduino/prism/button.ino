@@ -30,11 +30,26 @@ void readButtons(){
   digitalWrite(resetButtonLight, HIGH);
   
   // start button
+  int startButtonHeld = 0;
   while( startButtonVal == 1 && gameMode ){
+    startButtonHeld = 1;
     digitalWrite(startGamePin, HIGH);
     flashButtonLight( startButtonLight );    
     startButtonVal = digitalRead(startButton);
+    if( inGame ){
+      timer.run();
+    }    
   }
+  //if the start button was held
+  if( startButtonHeld ){
+    Serial.println("Change Game Status");
+    inGame = !inGame;
+    if( inGame ){
+      startTime = millis();
+    }
+    
+  }
+  // put start button back into normal state
   digitalWrite(startButtonLight, HIGH);
   digitalWrite(startGamePin, LOW);
   
