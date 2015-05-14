@@ -15,7 +15,7 @@
 #include <SimpleTimer.h>
 
 #define NUM_LASERS 3
-#define LIGHT_LEVEL 225
+#define LIGHT_LEVEL 200
 
 /* structure for lasers
  * pin - the pin the laser is connected to
@@ -43,8 +43,8 @@ int resetButton = 42;
 int startButton = 40;
 int trippedButton = 44;
 
-int laserTrippedPin = 19;
-int startGamePin = 18;
+int laserTrippedPin = 14;
+int startGamePin = 15;
 
 int gameModeIndicator = 46;
 int resetButtonLight = 48;
@@ -55,6 +55,7 @@ int trippedButtonLight = 52;
 
 // Functions defined in button.ino
 void readButtons();
+void flashButtonLight( int lightPin );
 void reset();
 
 // Functions defined in indicator.ino
@@ -120,6 +121,9 @@ void loop() {
   readButtons();
   readSensors( lasers, NUM_LASERS );
   updateIndicators( lasers, NUM_LASERS );
-  //reportStatus();
+  
+  if( gameMode ){
+    reportStatus();
+  }
 
 }

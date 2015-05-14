@@ -30,31 +30,31 @@ void readButtons(){
   digitalWrite(resetButtonLight, HIGH);
   
   // start button
-  while( startButtonVal == 1){
-    digitalWrite(startButtonLight, HIGH);
-    delay(100);
-    digitalWrite(startButtonLight, LOW);
-    delay(100);
+  while( startButtonVal == 1 && gameMode ){
+    digitalWrite(startGamePin, HIGH);
+    flashButtonLight( startButtonLight );    
     startButtonVal = digitalRead(startButton);
   }
   digitalWrite(startButtonLight, HIGH);
+  digitalWrite(startGamePin, LOW);
   
   // tripped button
   while( trippedButtonVal == 1){
-    digitalWrite(trippedButtonLight, HIGH);
-    delay(100);
-    digitalWrite(trippedButtonLight, LOW);
-    delay(100);
+    flashButtonLight( trippedButtonLight );
     trippedButtonVal = digitalRead(trippedButton);
   }
   digitalWrite(trippedButtonLight, HIGH);
   
 }
 
+void flashButtonLight( int lightPin ){
+  digitalWrite(lightPin, HIGH);
+  delay(100);
+  digitalWrite(lightPin, LOW);
+  delay(100);
+}
+
 void reset(){
   //reset game
-  digitalWrite(resetButtonLight, HIGH);
-  delay(100);
-  digitalWrite(resetButtonLight, LOW);
-  delay(100);
+  flashButtonLight( resetButtonLight );
 }

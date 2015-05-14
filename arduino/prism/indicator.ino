@@ -17,12 +17,10 @@ void updateIndicators( Laser laserArr[], int n ){
      }
    }
    
-   // Update the laserTripped indicator light
+   // Update the laserTripped signal variable
    if( numTripped > 0 ){
-     digitalWrite(laserTrippedPin, HIGH);
      laserTripped = true;
    } else {
-     digitalWrite(laserTrippedPin, LOW);
      laserTripped = false;
    }
    
@@ -38,7 +36,8 @@ void reportStatus(){
   
   //report tripped game lasers
   if( laserTripped ){
-    digitalWrite(laserTrippedPin, HIGH);  
+    digitalWrite(laserTrippedPin, HIGH);
+    delay(100);  
   } else {
     digitalWrite(laserTrippedPin, LOW);
   }
