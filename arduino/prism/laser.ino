@@ -24,6 +24,7 @@
 void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicators[], int n ){
     
   for( int i = 0; i < n; i++ ){
+      
       Laser aLaser;
       aLaser.pin = pins[i];
       aLaser.brightness = 255;
@@ -37,6 +38,9 @@ void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicato
       pinMode(aLaser.indicatorPin, OUTPUT);
       
       digitalWrite(aLaser.pin, HIGH);
+      
+      Serial.print(aLaser.pin);
+      Serial.println(" : ON");
       
       laserArr[i] = aLaser;
     }
