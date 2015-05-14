@@ -39,15 +39,19 @@ bool laserTripped = false;
 bool laserStartTripped = false;
 
 int gameModeButton = 38;
-int resetButton = 40;
-int trippedButton = 42;
+int resetButton = 42;
+int startButton = 40;
+int trippedButton = 44;
 
-int laserTrippedPin = 52;
-int startGamePin = 50;
-int gameModeIndicator = 44;
+int laserTrippedPin = 19;
+int startGamePin = 18;
 
-int resetButtonLight = 46;
-int trippedButtonLight = 48;
+int gameModeIndicator = 46;
+int resetButtonLight = 48;
+int startButtonLight = 50;
+int trippedButtonLight = 52;
+
+
 
 // Functions defined in button.ino
 void readButtons();
@@ -87,17 +91,20 @@ void setup() {
  
   pinMode(gameModeButton, INPUT_PULLUP);
   pinMode(resetButton, INPUT_PULLUP);
+  pinMode(startButton, INPUT_PULLUP);
   pinMode(trippedButton, INPUT_PULLUP); 
   
   pinMode(laserTrippedPin, OUTPUT);
   pinMode(startGamePin, OUTPUT);
   pinMode(gameModeIndicator, OUTPUT);
   pinMode(resetButtonLight, OUTPUT);
+  pinMode(startButtonLight, OUTPUT);
   pinMode(trippedButtonLight, OUTPUT);
   
   digitalWrite(startGamePin, LOW);
   
   digitalWrite(resetButtonLight, HIGH);
+  digitalWrite(startButtonLight, HIGH);
   digitalWrite(trippedButtonLight, HIGH);
   
   initializeLasers( lasers, pins, sensors, indicators, NUM_LASERS ); 
@@ -110,7 +117,7 @@ void setup() {
 void loop() {
   timer.run();
   
-  //readButtons();
+  readButtons();
   readSensors( lasers, NUM_LASERS );
   updateIndicators( lasers, NUM_LASERS );
   //reportStatus();

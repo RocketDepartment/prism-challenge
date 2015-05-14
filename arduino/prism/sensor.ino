@@ -11,7 +11,6 @@ void readSensors( Laser laserArr[], int n ){
     
     int val = analogRead(laserArr[i].sensorPin);
     laserArr[i].sensorValue = val;
-    Serial.println(val);
     
     if( val > LIGHT_LEVEL ){
       laserArr[i].indicatorValue = true;

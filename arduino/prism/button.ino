@@ -10,9 +10,8 @@ void readButtons(){
   // read button values
   int gameModeButtonVal = digitalRead(gameModeButton);
   int resetButtonVal = digitalRead(resetButton);
+  int startButtonVal = digitalRead(startButton);
   int trippedButtonVal = digitalRead(trippedButton);
-  
-  Serial.println(trippedButtonVal);
   
   // game mode button
   if( gameModeButtonVal == 1 ){
@@ -31,6 +30,14 @@ void readButtons(){
   digitalWrite(resetButtonLight, HIGH);
   
   // start button
+  while( startButtonVal == 1){
+    digitalWrite(startButtonLight, HIGH);
+    delay(100);
+    digitalWrite(startButtonLight, LOW);
+    delay(100);
+    startButtonVal = digitalRead(startButton);
+  }
+  digitalWrite(startButtonLight, HIGH);
   
   // tripped button
   while( trippedButtonVal == 1){
