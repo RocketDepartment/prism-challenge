@@ -15,7 +15,7 @@
 #include <SimpleTimer.h>
 
 #define NUM_LASERS 4
-#define LIGHT_LEVEL 100
+#define LIGHT_LEVEL 200
 
 /* structure for lasers
  * pin - the pin the laser is connected to
@@ -35,7 +35,7 @@ typedef struct _laser {
 // Declare global variables for the game
 bool inGame = false;
 Laser lasers[NUM_LASERS];
-int startTime = 0;
+unsigned long startTime = 0;
 
 bool gameMode = true;
 bool laserTripped = false;

@@ -47,9 +47,6 @@ void readButtons(){
     Serial.println("Change Game Status");
     inGame = !inGame;
     startTime = millis();
-    //if( inGame ){
-      //startTime = millis();
-    //}
     
   }
   // put start button back into normal state
