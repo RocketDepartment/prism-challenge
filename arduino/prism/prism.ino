@@ -8,6 +8,11 @@
  *05.09.2015
  */
 
+#include "Adafruit_LEDBackpack.h"
+#include "Adafruit_GFX.h"
+
+#include <Wire.h>
+#include <SimpleTimer.h>
 
 #define NUM_LASERS 1
 
@@ -67,10 +72,17 @@ int pins[] = { 9 };
 int sensors[] = { A0 };
 int indicators[] = { 22 };
 
+// the timer object
+SimpleTimer timer;
+
+Adafruit_7segment matrix = Adafruit_7segment();
+
 
 // the setup routine runs once when you press reset:
-void setup() {    
-  Serial.begin(9600); 
+void setup() {
+  timer.setInterval(100, updateTimer);  
+  Serial.begin(9600);
+  matrix.begin(0x70); 
  
   pinMode(gameModeButton, INPUT_PULLUP);
   pinMode(resetButton, INPUT_PULLUP);
@@ -95,10 +107,10 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
+  timer.run();
+  Serial.println("Hello");
   
-  delay(250);
-  
-  readButtons();
+  //readButtons();
   readSensors( lasers, NUM_LASERS );
   updateIndicators( lasers, NUM_LASERS );
   //reportStatus();
