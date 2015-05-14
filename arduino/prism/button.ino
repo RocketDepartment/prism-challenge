@@ -20,6 +20,8 @@ void readButtons(){
   } else {
     gameMode = false;
     digitalWrite(gameModeIndicator, LOW);
+    matrix.print(10000, DEC);
+    matrix.writeDisplay();
   }
   
   // reset button
@@ -44,9 +46,10 @@ void readButtons(){
   if( startButtonHeld ){
     Serial.println("Change Game Status");
     inGame = !inGame;
-    if( inGame ){
-      startTime = millis();
-    }
+    startTime = millis();
+    //if( inGame ){
+      //startTime = millis();
+    //}
     
   }
   // put start button back into normal state

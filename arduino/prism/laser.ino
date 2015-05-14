@@ -39,9 +39,6 @@ void initializeLasers( Laser laserArr[], int pins[], int sensors[], int indicato
       
       digitalWrite(aLaser.pin, HIGH);
       
-      Serial.print(aLaser.pin);
-      Serial.println(" : ON");
-      
       laserArr[i] = aLaser;
     }
     
