@@ -83,6 +83,10 @@ def main():
 		game_start_val = GPIO.input(input_game_start)
 		laser_tripped_val = GPIO.input(input_laser_tripped)
 
+		# print game_start_val
+		# print laser_tripped_val
+		# sleep(0.5)
+
 		# falling edge state change from held button to released
 		if last_game_start_val and not game_start_val:
 			
@@ -106,7 +110,7 @@ def main():
 				cur.execute("""UPDATE scores 
 							   SET lasers_hit=%s, time=%s, end_time=%s 
 							   WHERE start_time=%s
-							""", (current_game.lasers_hit, current_game.total_time, current_game.end_time, current_game.start_time))
+							""", (current_game.lasers_hit, current_game.score, current_game.end_time, current_game.start_time))
 				db.commit()
 
 			else:
@@ -118,10 +122,16 @@ def main():
 				db.commit()
 
 		# rising edge state changed from held button to released
-		if not last_laser_tripped_val and laser_tripped_val:
+		if not last_laser_tripped_val and laser_tripped_val and IN_GAME:
 
 			# add 1 to number of lasers hit 
 			current_game.lasers_hit = current_game.lasers_hit + 1
+
+			cur.execute("""UPDATE scores 
+							SET lasers_hit=%s 
+							WHERE start_time=%s
+						""", (current_game.lasers_hit, current_game.start_time))
+			db.commit()
 			
 			print("Laser Tripped!")
 			sleep(0.5)

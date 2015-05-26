@@ -14,8 +14,8 @@
 #include <Wire.h>
 #include <SimpleTimer.h>
 
-#define NUM_LASERS 4
-#define LIGHT_LEVEL 200
+#define NUM_LASERS 3
+#define LIGHT_LEVEL 35
 
 /* structure for lasers
  * pin - the pin the laser is connected to
@@ -77,9 +77,9 @@ void testLasers( Laser laserArr[], int n );
 // Functions defined in sensor.ino
 void readSensors( Laser laserArr[], int n );
   
-int pins[] = { 9, 8, 7, 6 };
-int sensors[] = { A0, A1, A2, A3 };
-int indicators[] = { 22, 24, 26, 28 };
+int pins[] = { 9, 8, 7 };
+int sensors[] = { A0, A1, A4 };
+int indicators[] = { 24, 26, 28 };
 
 // the timer object
 SimpleTimer timer;
@@ -124,7 +124,7 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  
+ 
   readButtons();
   readSensors( lasers, NUM_LASERS );
   updateIndicators( lasers, NUM_LASERS );

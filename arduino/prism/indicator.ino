@@ -36,8 +36,7 @@ void reportStatus(){
   
   //report tripped game lasers
   if( laserTripped ){
-    digitalWrite(laserTrippedPin, HIGH);
-    delay(100);  
+    digitalWrite(laserTrippedPin, HIGH); 
   } else {
     digitalWrite(laserTrippedPin, LOW);
   }
